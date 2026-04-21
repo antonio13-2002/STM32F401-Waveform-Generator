@@ -1,0 +1,17 @@
+10:48:53 **** Incremental Build of configuration Debug for project led_on ****
+make -j20 all 
+arm-none-eabi-gcc "../Src/tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -DSTM32F401xE -c -I../Inc -I"C:/Users/anton/Documents/Documenti/MaterialeUniversita/Tesi/Drivers/CMSIS/Include" -I"C:/Users/anton/Documents/Documenti/MaterialeUniversita/Tesi/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/tim.d" -MT"Src/tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/tim.o"
+arm-none-eabi-gcc -o "led_on.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\anton\STM32CubeIDE\My_workspace\led_on\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_on.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_on.elf
+ 
+arm-none-eabi-size  led_on.elf 
+arm-none-eabi-objdump -h -S led_on.elf  > "led_on.list"
+   text	   data	    bss	    dec	    hex	filename
+  15564	    464	   1920	  17948	   461c	led_on.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_on.list
+ 
+
+10:48:55 Build Finished. 0 errors, 0 warnings. (took 1s.833ms)
+

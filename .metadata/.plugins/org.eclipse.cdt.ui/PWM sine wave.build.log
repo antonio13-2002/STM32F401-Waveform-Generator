@@ -1,0 +1,17 @@
+11:40:18 **** Build of configuration Debug for project PWM sine wave ****
+make -j20 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F401xE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"C:/Users/anton/Documents/Documenti/MaterialeUniversita/Tesi/Drivers/CMSIS/Include" -I"C:/Users/anton/Documents/Documenti/MaterialeUniversita/Tesi/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "PWM sine wave.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\anton\STM32CubeIDE\My_workspace\PWM sine wave\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PWM sine wave.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: PWM sine wave.elf
+ 
+arm-none-eabi-size  PWM\ sine\ wave.elf 
+arm-none-eabi-objdump -h -S PWM\ sine\ wave.elf  > "PWM sine wave.list"
+   text	   data	    bss	    dec	    hex	filename
+  29004	    456	   5904	  35364	   8a24	PWM sine wave.elf
+Finished building: default.size.stdout
+ 
+Finished building: PWM sine wave.list
+ 
+
+11:40:20 Build Finished. 0 errors, 0 warnings. (took 2s.222ms)
+

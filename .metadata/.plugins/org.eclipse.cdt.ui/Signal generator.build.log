@@ -1,0 +1,17 @@
+17:30:27 **** Incremental Build of configuration Debug for project Signal generator ****
+make -j20 all 
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32F401xE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"C:/Users/anton/Documents/Documenti/MaterialeUniversita/Tesi/Drivers/CMSIS/Include" -I"C:/Users/anton/Documents/Documenti/MaterialeUniversita/Tesi/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc -o "Signal generator.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\anton\STM32CubeIDE\My_workspace\Signal generator\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Signal generator.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Signal generator.elf
+ 
+arm-none-eabi-size  Signal\ generator.elf 
+arm-none-eabi-objdump -h -S Signal\ generator.elf  > "Signal generator.list"
+   text	   data	    bss	    dec	    hex	filename
+  32884	    456	   5904	  39244	   994c	Signal generator.elf
+Finished building: default.size.stdout
+ 
+Finished building: Signal generator.list
+ 
+
+17:30:28 Build Finished. 0 errors, 0 warnings. (took 803ms)
+

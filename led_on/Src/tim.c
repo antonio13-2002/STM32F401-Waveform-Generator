@@ -1,0 +1,61 @@
+#include <stdint.h>
+#include "stm32f4xx.h"
+#include "tim.h"
+
+void tim5_pa2_input_capture_mode(void)
+{
+	SET_BIT(RCC->AHB1ENR,RCC_AHB1ENR_GPIOAEN); //enable clock for port A
+	SET_BIT(RCC->APB1ENR,RCC_APB1ENR_TIM5EN);  //enable clock for TIM5
+	MODIFY_REG(GPIOA->MODER,GPIO_MODER_MODER2,0U<<GPIO_MODER_MODER2_Pos); //PA2 is set in input mode (00)
+	MODIFY_REG(GPIOA->AFR[0],GPIO_AFRL_AFSEL2,2U<<GPIO_AFRL_AFSEL2_Pos); //enabling alternate function
+
+	//setting timer
+	TIM5->PSC = 16U - 1; //because i want a timer clock frequency of 1MHz, and period of 0.1ms
+
+	//input capture mode
+	MODIFY_REG(TIM5->CCMR2,TIM_CCMR2_CC3S,1U<<(TIM_CCMR2_CC3S_Pos)); //linking TIMx_CCRx register to TI3
+	CLEAR_BIT(TIM5->CCER,TIM_CCER_CC3P);
+	CLEAR_BIT(TIM5->CCER,TIM_CCER_CC3NP); //setting bits CC3P and CC3NP to (00) for selecting the rising edge
+	MODIFY_REG(TIM5->CCMR2,TIM_CCMR2_IC3PSC,0U<<(TIM_CCMR2_IC3PSC_Pos)); //disable input prescaler
+	SET_BIT(TIM5->DIER,TIM_DIER_CC3IE);
+	SET_BIT(TIM5->CCER,TIM_CCER_CC3E);//enabling capture of the counter
+
+	SET_BIT(TIM5->CR1,TIM_CR1_CEN); //enabling counter
+
+
+}
+
+void tim2_pa5_input_capture(void)
+{
+	/* Accesso al clock per GPIOA */
+	SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOAEN);
+
+	/* Imposto PA5 per alternate function */
+	MODIFY_REG(GPIOA->MODER, GPIO_MODER_MODER5, (2U << GPIO_MODER_MODER5_Pos));
+
+	/* Configuro alternate function 01 (TIM2_CH1) */
+	MODIFY_REG(GPIOA->AFR[0], GPIO_AFRL_AFSEL5, (1U << GPIO_AFRL_AFSEL5_Pos));
+
+	/* Accesso TIM2 al clock */
+	SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM2EN);
+
+	/* Prescaler per avere clock a 1 MHz (1us) */
+	//TIM2->PSC = 16U - 1; // 16 000 000/16 = 1 000 000
+
+	/* Connetto TI1 a CCR1 in input mode */
+	MODIFY_REG(TIM2->CCMR1, TIM_CCMR1_CC1S, (1U << TIM_CCMR1_CC1S_Pos));
+
+	/* Seleziono rising edge */
+	CLEAR_BIT(TIM2->CCER, TIM_CCER_CC1P);
+	CLEAR_BIT(TIM2->CCER, TIM_CCER_CC1NP);
+
+	/* Capture enable */
+	SET_BIT(TIM2->CCER, TIM_CCER_CC1E);
+
+
+	/* Timer enable */
+	SET_BIT(TIM2->CR1, TIM_CR1_CEN);
+	SET_BIT(TIM5->DIER,TIM_DIER_UIE);
+	SET_BIT(TIM5->DIER,TIM_DIER_CC1IE);
+
+}

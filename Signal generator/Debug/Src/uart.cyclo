@@ -1,0 +1,5 @@
+../Src/uart.c:3:6:UART2_Init	1
+../Src/uart.c:19:5:UART2_Write	2
+../Src/uart.c:25:5:UART2_Read	2
+../Src/uart.c:30:5:__io_putchar	1
+../Src/uart.c:34:5:__io_getchar	1

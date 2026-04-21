@@ -1,0 +1,5 @@
+../Src/signals.c:10:6:sin_generation	40	static
+../Src/signals.c:22:6:tri_generation	40	static
+../Src/signals.c:39:6:sawt_generation	40	static
+../Src/signals.c:51:6:step_generation	24	static
+../Src/signals.c:63:6:dc_generation	24	static

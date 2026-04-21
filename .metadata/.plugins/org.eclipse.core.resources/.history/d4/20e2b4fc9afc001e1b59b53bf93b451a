@@ -1,0 +1,26 @@
+#include "stm32f4xx.h"
+#include <stdint.h>
+
+
+
+void button_handler();
+void button_init();
+
+int main(void)
+{
+	SET_BIT(RCC->AHB1ENR,RCC_AHB1ENR_GPIOAEN); //enable clock for port C
+	MODIFY_REG(GPIOA->MODER,GPIO_MODER_MODER0,0U<<GPIO_MODER_MODER0_Pos); //PA0 is set in input mode
+	MODIFY_REG(GPIOA->MODER,GPIO_MODER_MODER5,1U<<GPIO_MODER_MODER5_Pos); //PA5 is set in output mode
+
+	while (1)
+	{
+		SET_BIT((uint32_t)GPIOA->IDR,GPIO_IDR_IDR_0); //set PA0 in input mode
+
+		if(READ_BIT(GPIOA->IDR,GPIO_IDR_IDR_0))
+		{
+			SET_BIT(GPIOA->ODR,GPIO_ODR_ODR_5);
+		}
+		else CLEAR_BIT(GPIOA->ODR,GPIO_ODR_ODR_5);
+	}
+
+}

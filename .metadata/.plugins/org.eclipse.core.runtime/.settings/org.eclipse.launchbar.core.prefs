@@ -1,0 +1,17 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:led_on,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM prova,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM generation Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM variable duty,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Signal generator Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM sine wave Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Helloworld Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Helloworld2
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Helloworld\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Helloworld\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Helloworld2/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PROVA\ SEGNAL\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM\ generation\ Debug/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM\ generation\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM\ prova/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM\ prova/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:PWM\ sine\ wave\ Debug/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Signal\ generator\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:led_on/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:led_on/activeLaunchTarget=null\:---

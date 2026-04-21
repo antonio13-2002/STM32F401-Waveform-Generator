@@ -1,0 +1,12 @@
+11:55:59 **** Incremental Build of configuration Debug for project PWM read ****
+Info: Internal Builder is used for build
+gcc -DSTM32F401xE -DSTM32 -DSTM32F4 -DSTM32F401RETx -DDEBUG "-IC:\\Users\\anton\\Documents\\Documenti\\MaterialeUniversita\\Tesi\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include" "-IC:\\Users\\anton\\Documents\\Documenti\\MaterialeUniversita\\Tesi\\Drivers\\CMSIS\\Include" -O0 -g3 -Wall -c -fmessage-length=0 -o "Src\\main.o" "..\\Src\\main.c" 
+gcc -DSTM32F401xE -DSTM32 -DSTM32F4 -DSTM32F401RETx -DDEBUG "-IC:\\Users\\anton\\Documents\\Documenti\\MaterialeUniversita\\Tesi\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include" "-IC:\\Users\\anton\\Documents\\Documenti\\MaterialeUniversita\\Tesi\\Drivers\\CMSIS\\Include" -O0 -g3 -Wall -c -fmessage-length=0 -o "Src\\sysmem.o" "..\\Src\\sysmem.c" 
+gcc -DSTM32F401xE -DSTM32 -DSTM32F4 -DSTM32F401RETx -DDEBUG "-IC:\\Users\\anton\\Documents\\Documenti\\MaterialeUniversita\\Tesi\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include" "-IC:\\Users\\anton\\Documents\\Documenti\\MaterialeUniversita\\Tesi\\Drivers\\CMSIS\\Include" -O0 -g3 -Wall -c -fmessage-length=0 -o "Src\\syscalls.o" "..\\Src\\syscalls.c" 
+..\Src\syscalls.c:31:10: fatal error: sys/times.h: No such file or directory
+   31 | #include <sys/times.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+
+11:55:59 Build Failed. 1 errors, 0 warnings. (took 612ms)
+

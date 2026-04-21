@@ -1,0 +1,22 @@
+#include "stm32f4xx.h"
+#include <stdint.h>
+
+
+int main(void)
+{
+	SET_BIT(RCC->AHB1ENR,RCC_AHB1ENR_GPIOAEN); //enable clock for port A
+	SET_BIT(RCC->AHB1ENR,RCC_AHB1ENR_GPIOCEN); //enable clock for port C
+
+	MODIFY_REG(GPIOC->MODER,GPIO_MODER_MODER13,0U<<GPIO_MODER_MODER13_Pos); //PC13 is set in input mode
+	MODIFY_REG(GPIOA->MODER,GPIO_MODER_MODER5,1U<<GPIO_MODER_MODER5_Pos); //PA5 is set in output mode
+
+	while (1)
+	{
+		//reading input
+		if(~(READ_BIT(GPIOC->IDR,GPIO_IDR_IDR_13)))
+		{
+			CLEAR_BIT(GPIOA->ODR,GPIO_ODR_ODR_5);
+		}
+		else SET_BIT(GPIOA->ODR,GPIO_ODR_ODR_5);
+	}
+}

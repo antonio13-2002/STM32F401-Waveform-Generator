@@ -1,0 +1,10 @@
+15:53:07 **** Incremental Build of configuration Debug for project PROVA SEGNAL ****
+make -j20 all 
+arm-none-eabi-size  PROVA\ SEGNAL.elf 
+   text	   data	    bss	    dec	    hex	filename
+   3816	     96	   1904	   5816	   16b8	PROVA SEGNAL.elf
+Finished building: default.size.stdout
+ 
+
+15:53:07 Build Finished. 0 errors, 0 warnings. (took 290ms)
+

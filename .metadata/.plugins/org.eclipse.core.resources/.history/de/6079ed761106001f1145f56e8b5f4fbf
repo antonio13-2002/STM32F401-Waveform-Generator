@@ -1,0 +1,52 @@
+/* I will use TIM5, which is a general purpose timer, for capturing input signal when is on rising edge.
+ * So i will enable the RCC register of APB1 bus, on which TIM5 is interfaced. I will use CH3 for reading
+ * the signal, and PA2 set in input mode
+*/
+
+
+#include "stm32f4xx.h"
+#include <stdint.h>
+#include <stdio.h>
+
+uint32_t volatile value1 = 0;
+float frequency = 0;
+
+int main(void)
+{
+	SET_BIT(RCC->AHB1ENR,RCC_AHB1ENR_GPIOAEN); //enable clock for port A
+	SET_BIT(RCC->APB1ENR,RCC_APB1ENR_TIM5EN);  //enable clock for TIM5
+	MODIFY_REG(GPIOA->MODER,GPIO_MODER_MODER2,0U<<GPIO_MODER_MODER2_Pos); //PA2 is set in input mode (00)
+	MODIFY_REG(GPIOA->AFR[0],GPIO_AFRL_AFRL2,2U<<GPIO_AFRL_AFSEL2_Pos); //enabling alternate function
+
+	//setting timer
+    WRITE_REG(TIM5->PSC,15U); //because i want a timer clock frequency of 10kHz, and period of 0.1ms
+    MODIFY_REG(TIM5->CCMR2,TIM_CCMR2_OC3M,3U<<TIM_CCMR2_OC3M_Pos); //toggle mode
+    SET_BIT(TIM5->CR1,TIM_CR1_CEN); //enabling counter
+
+    //input capture mode
+    MODIFY_REG(TIM5->CCMR2,TIM_CCMR2_CC3S,1U<<TIM_CCMR2_CC3S_Pos); //linking TIMx_CCRx register to TI3
+    CLEAR_BIT(TIM5->CCER,TIM_CCER_CC3P);
+    CLEAR_BIT(TIM5->CCER,TIM_CCER_CC3NP); //setting bits CC3P and CC3NP to (00) for selecting the rising edge
+    MODIFY_REG(TIM5->CCMR2,TIM_CCMR2_IC3PSC,0U<<TIM_CCMR2_IC3PSC_Pos); //disable input prescaler
+    SET_BIT(TIM5->DIER,TIM_DIER_CC3IE); //enabling interrupt
+    SET_BIT(TIM5->CCER,TIM_CCER_CC3E); //enabling capture of the counter
+    NVIC_EnableIRQ(TIM5_IRQn);
+
+
+    while(1){
+    	//reading values of two rising edges
+
+
+
+
+    		//CLEAR_BIT(TIM5->SR,TIM_SR_CC3IF); //clearing the flag, avoiding the overcapture
+
+
+
+    }
+}
+
+
+void TIM5_IRQHandler (void){
+	value1 = (uint32_t)READ_REG(TIM5->CCR3);
+}

@@ -1,0 +1,8 @@
+../Src/sin.c:9:6:sin_generation	40	static
+../Src/sin.c:21:6:tri_generation	40	static
+../Src/sin.c:36:6:sawt_generation	40	static
+../Src/sin.c:47:6:step_generation	24	static
+../Src/sin.c:57:6:dc_generation	24	static
+../Src/sin.c:65:6:sin2_generation	48	static
+../Src/sin.c:76:6:atan_generation	32	static
+../Src/sin.c:87:6:pol_generation	48	static

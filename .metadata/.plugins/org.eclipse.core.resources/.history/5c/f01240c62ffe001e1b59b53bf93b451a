@@ -1,0 +1,32 @@
+/* I will use TIM2, which is a general purpose timer, for obtaining toggle
+ *of user green led. So i will enable the RCC register of APB1 bus, on which TIM2 is interfaced
+*/
+
+
+#include "stm32f4xx.h"
+
+
+int main(void)
+{
+	SET_BIT(RCC->AHB1ENR,RCC_AHB1ENR_GPIOAEN); //enable clock for port A
+	SET_BIT(RCC->APB1ENR,RCC_APB1ENR_TIM2EN);  //enable clock for TIM2
+	MODIFY_REG(GPIOA->MODER,GPIO_MODER_MODER5,2U<<GPIO_MODER_MODER5_Pos); //PA5 is set in alternate function mode
+	MODIFY_REG(GPIOA->AFR[0],GPIO_AFRL_AFRL5,1U<<GPIO_AFRL_AFSEL5_Pos);
+	//setting timer
+    WRITE_REG(TIM2->PSC,1599U); //because i want a timer clock frequency of 10kHz, and period of 0.1ms
+    WRITE_REG(TIM2->ARR,10000U); //autoreload value
+    MODIFY_REG(TIM2->CCMR1,TIM_CCMR1_OC1M,3U<<TIM_CCMR1_OC1M_Pos);
+    SET_BIT(TIM2->CCER,TIM_CCER_CC1E);
+
+    SET_BIT(TIM2->CR1,~(TIM_CR1_DIR)); //upcounting mode
+    SET_BIT(TIM2->CR1,TIM_CR1_CEN); //enabling counter
+
+    while(1)
+    {
+    	if(READ_BIT(TIM2->SR,TIM_SR_UIF)){
+    		SET_BIT(GPIOA->ODR,GPIO_ODR_ODR_5); //toggle
+    		CLEAR_BIT(TIM2->SR,TIM_SR_UIF);
+    	}
+    }
+
+}

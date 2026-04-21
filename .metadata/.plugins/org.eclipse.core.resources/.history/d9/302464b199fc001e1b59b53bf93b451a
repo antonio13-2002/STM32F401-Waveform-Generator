@@ -1,0 +1,26 @@
+#include "stm32f4xx.h"
+#include <stdint.h>
+
+void delay (uint32_t time){
+	for (int i=0;i<time;i++)
+		for(int j=0; j<time; j++);
+}
+
+void button_handler();
+void button_init();
+
+int main(void)
+{
+	SET_BIT(RCC->AHB1ENR,RCC_AHB1ENR_GPIOAEN); //enable clock for port A
+	MODIFY_REG(GPIOA->MODER,GPIO_MODER_MODER5,1U<<GPIO_MODER_MODER5_Pos); //enable PA5 in output mode
+
+	while(1){
+
+		delay(1000);
+		SET_BIT(GPIOA->ODR,GPIO_ODR_ODR_5); //led on
+		delay(1000);
+		CLEAR_BIT(GPIOA->ODR,GPIO_ODR_ODR_5); //led off
+
+	}
+
+}

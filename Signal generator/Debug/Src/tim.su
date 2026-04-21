@@ -1,0 +1,2 @@
+../Src/tim.c:7:6:tim2_pa5_PWM_mode	8	static
+../Src/tim.c:28:6:tim3_interrupt_generation	4	static

@@ -1,0 +1,31 @@
+/* I will use TIM5, which is a general purpose timer, for capturing input signal when is on rising edge.
+ * So i will enable the RCC register of APB1 bus, on which TIM5 is interfaced. I will use CH3 for reading
+ * the signal, and PA2 set in input mode
+*/
+
+
+#include "stm32f4xx.h"
+#include <stdint.h>
+#include <stdio.h>
+#include "tim.h"
+
+uint32_t value1 = 0;
+//float frequency = 0;
+
+
+int main(void)
+{
+	SCB->CPACR |= ((3UL << 20)|(3UL << 11*2)); //enabling fpu
+	tim2_pa5_input_capture(); //setup
+
+    while(1){
+    	while(!(READ_BIT(TIM2->SR,TIM_SR_CC1IF))){
+    		value1 = TIM2->CCR1;
+    		//frequency = (float)(1000000/value1);
+    		CLEAR_BIT(TIM2->SR,TIM_SR_CC1IF); //clearing the flag, avoiding the overcapture
+
+    	}
+    //frequency = 0;
+    }
+
+}
