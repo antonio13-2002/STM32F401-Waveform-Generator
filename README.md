@@ -1,37 +1,40 @@
 # STM32F401 Waveform Generator (AWG)
 
-## 1. Panoramica del Progetto
-Questo progetto implementa un **Generatore Arbitrario di Forme d'Onda (AWG)** utilizzando la scheda di sviluppo basata sul microcontrollore **STM32F401**.
+## 1. Project Overview
+This project implements an **Arbitrary Waveform Generator (AWG)** using an **STM32F401-based** development board.
 
-Il principio di funzionamento si basa sulla generazione di un segnale **PWM (Pulse Width Modulation)** a *duty cycle* variabile. Modificando dinamicamente il duty cycle nel tempo via software, viene fatto variare il valore medio della tensione in uscita dal pin del microcontrollore. 
+The core operating principle relies on generating a **Pulse Width Modulation (PWM)** signal with a variable duty cycle. By dynamically modifying the duty cycle via software over time, the average voltage output of the microcontroller's pin changes accordingly. 
 
-Per ottenere la forma d'onda analogica finale, il segnale PWM digitale viene fatto passare attraverso un **filtro passa-basso** hardware esterno (circuito RC). Questo filtro ha il compito fondamentale di isolare la componente media del segnale, eliminando le alte frequenze di commutazione del PWM. Collegando l'uscita del filtro a un oscilloscopio, è possibile visualizzare la forma d'onda generata in modo continuo.
-
----
-
-## 2. Strumenti e Framework
-Per lo sviluppo e il collaudo di questo progetto sono state utilizzate le seguenti tecnologie:
-
-* **Libreria CMSIS (Cortex-Microcontroller Software Interface Standard):** Un framework standard fornito da ARM che permette di programmare a basso livello ("bare-metal"). Tramite CMSIS è possibile interagire direttamente con i registri e i singoli bit del microcontrollore, garantendo la massima efficienza e un controllo preciso sulle periferiche hardware necessarie (come i Timer per la generazione del PWM).
-* **STM32CubeIDE:** L'ambiente di sviluppo integrato (IDE) ufficiale basato su Eclipse. Offre un ambiente completo per la scrittura del codice e dispone di potenti funzionalità di **in-circuit debugging**, permettendo di eseguire il codice passo-passo, ispezionare lo stato dei registri in tempo reale e testare il comportamento del firmware prima del rilascio.
+To obtain the final analog waveform, this digital PWM signal is routed through an external hardware **low-pass filter** (RC circuit). The primary function of this filter is to isolate the average voltage component of the signal while stripping away the high-frequency PWM switching noise. By connecting the filter's output to an oscilloscope, you can visualize the generated continuous waveform in real-time.
 
 ---
 
-## 3. Istruzioni per l'Esecuzione
+## 2. Tools and Frameworks
+The following technologies were used for the development and testing of this project:
 
-### Prerequisiti Importanti
-Per poter compilare correttamente il progetto, è **strettamente necessario** includere la libreria **CMSIS** specifica per la famiglia STM32F4xx nei file sorgenti. Assicurati che i percorsi di inclusione (*Include paths*) siano configurati correttamente all'interno delle proprietà del progetto nel tuo IDE.
+* **CMSIS (Cortex-Microcontroller Software Interface Standard):** An industry-standard framework provided by ARM that enables "bare-metal" programming. CMSIS allows for direct interaction with the microcontroller's hardware registers and individual bits. This ensures maximum execution efficiency and precise control over the required hardware peripherals (such as the hardware Timers used for PWM generation).
+* **STM32CubeIDE:** The official Eclipse-based Integrated Development Environment (IDE) provided by STMicroelectronics. It offers a comprehensive coding environment and features powerful **in-circuit debugging** capabilities. This allows for step-by-step code execution, real-time register inspection, and thorough testing of the firmware directly on the target hardware before final deployment.
 
-### Come eseguire il codice sulla scheda target
+---
 
-1.  **Clona la repository** sul tuo computer locale:
+## 3. Build and Run Instructions
+
+### Important Prerequisites
+To successfully compile this project, it is **strictly required** to include the **CMSIS** library specific to the STM32F4xx family in your source files. Please ensure that the *Include paths* are correctly configured within the project properties of your IDE.
+
+### How to run the code on the target board
+
+1.  **Clone the repository** to your local machine:
     ```bash
     git clone [https://github.com/tuo-nome-utente/STM32F401-Waveform-Generator.git](https://github.com/tuo-nome-utente/STM32F401-Waveform-Generator.git)
     ```
-2.  **Importa il progetto:** Apri STM32CubeIDE, naviga in `File > Import... > General > Existing Projects into Workspace` e seleziona la cartella del progetto che hai appena scaricato.
-3.  **Configurazione Hardware:**
-    * Collega la tua board STM32F401 al computer tramite il cavo USB.
-    * Collega l'ingresso del circuito filtro passa-basso al pin configurato per l'uscita del segnale PWM.
-    * Collega la sonda di un oscilloscopio all'uscita analogica del filtro.
-4.  **Compilazione (Build):**
-    * Clicca sul pulsante **Build** (
+2.  **Import the project:** Open STM32CubeIDE, navigate to `File > Import... > General > Existing Projects into Workspace`, and select the downloaded project folder.
+3.  **Hardware Setup:**
+    * Connect your STM32F401 board to your computer via the USB cable.
+    * Connect the input of your RC low-pass filter to the configured PWM output pin on the board.
+    * Connect an oscilloscope probe to the analog output of the filter.
+4.  **Build:**
+    * Click the **Build** button (the hammer icon) to compile the code. Check the console output to ensure the process finishes with `0 errors`.
+5.  **Run/Debug:**
+    * Click the **Run** (green "Play" icon) or **Debug** (bug icon) button to flash the compiled firmware directly into the target board's memory and start execution.
+6.  **Verify:** Check your oscilloscope screen to view the generated waveform.
